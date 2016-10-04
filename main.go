@@ -1,36 +1,20 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
-	"os"
 
 	sockjs "github.com/lavab/sockjs-go-client"
+	// "github.com/gmallard/stompngo"
 )
-
-const configFile = "config.json"
-
-// Configuration contain
-// Addess = Socket URL
-// Topics = STOMP Topic to subscribe
-type Configuration struct {
-	Address string
-	Topics  []string
-}
 
 func main() {
 	log.Printf("Start")
 
-	log.Printf("Read configfile")
+	conf, err := ReadConf()
 
-	file, _ := os.Open(configFile)
-	decoder := json.NewDecoder(file)
-	conf := Configuration{}
-	err := decoder.Decode(&conf)
 	if err != nil {
-		log.Printf("error: %s", err)
+		return
 	}
-	log.Println(conf.Address)
 
 	ws, wserr := sockjs.NewClient(conf.Address)
 
@@ -40,6 +24,6 @@ func main() {
 
 	wsinfo, wserr := ws.Info()
 
-	log.Printf("Info: %t\n", wsinfo.WebSocket)
+	log.Printf("Info SockJS WebSocket: %t\n", wsinfo.WebSocket)
 
 }
