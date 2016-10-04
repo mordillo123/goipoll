@@ -1,0 +1,4 @@
+{
+    "Address": "https://<FQDN>/ipoll/socket",
+    "Topics": ["/topic/start","/topic/stop","/topic/info"]
+}
