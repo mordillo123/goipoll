@@ -23,4 +23,6 @@ _testmain.go
 *.test
 *.prof
 goipoll
+debug
 config.json
+launch.json
